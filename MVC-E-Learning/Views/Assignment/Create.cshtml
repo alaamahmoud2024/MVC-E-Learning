@@ -1,0 +1,23 @@
+﻿@using BL.ViewModels
+@model AssignmentVM
+@{
+    ViewData["Title"] = "Create";
+    var CourseId = ViewBag.CourseId;
+}
+
+<div class="container">
+
+    <form asp-controller="Assignment" asp-action="create" asp-route-courseId="@ViewBag.CourseId" enctype="multipart/form-data">
+
+        @* <input type="hidden" asp-for="CourseId" value="CourseId" /> *@
+
+        <div class="form-group">
+            <label required> Assignment File :</label>
+            <input type="file" class="form-control" asp-for="Assignment" />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
+        </div>
+    </form>
+</div>

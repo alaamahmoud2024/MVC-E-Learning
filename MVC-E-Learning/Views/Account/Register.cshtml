@@ -1,0 +1,75 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row">
+	<div class="agileits-top">
+		<form asp-controller="Account" asp-action="Register" method="post">
+			<div asp-validation-summary="All"></div>
+
+			<div class="mb-3">
+				<label for="FName" class="form-label">First Name</label>
+				<input type="text" asp-for="FName" class="form-control" id="FName">
+				<span asp-validation-for="FName" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label for="LName" class="form-label">Last Name</label>
+				<input type="text" asp-for="LName" class="form-control" id="LName">
+				<span asp-validation-for="LName" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label for="Email" class="form-label">Email address</label>
+				<input type="email" asp-for="Email" class="form-control" id="Email" aria-describedby="emailHelp">
+				<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+				<span asp-validation-for="FName" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label for="Password" class="form-label">Password</label>
+				<input type="password" asp-for="Password" class="form-control" id="Password">
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label for="ConfirmPassword" class="form-label">Confirm Password</label>
+				<input type="password" asp-for="ConfirmPassword" class="form-control" id="ConfirmPassword">
+				<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+			</div>
+			<div class="mb-3 form-check">
+				<input type="checkbox" class="form-check-input" id="exampleCheck1">
+				<label class="form-check-label" for="exampleCheck1">Check me out</label>
+			</div>
+
+			<div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="UserType" id="inlineRadio1" value="Student">
+					<label class="form-check-label" for="inlineRadio1">Student</label>
+				</div>
+
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="UserType" id="inlineRadio2" value="Instructor">
+					<label class="form-check-label" for="inlineRadio2">Instructor</label>
+				</div>
+			</div>
+
+			<div class="wthree-text">
+				<label class="anim">
+					@* <input asp-for="Agree" class="checkbox" required=""> *@
+					<span>I Agree To The Terms & Conditions</span>
+				</label>
+				<div class="clear"> </div>
+			</div>
+
+			<input type="submit" class="btn btn-primary" value="Sign Up">
+		</form>
+		<p>Don't have an Account? <a asp-action="Login"> Login Now!</a></p>
+	</div>
+</div>
+@* 
+@section Validation 
+{
+	<partial name="_ValidationScriptsPartial"></partial>
+}
+ *@

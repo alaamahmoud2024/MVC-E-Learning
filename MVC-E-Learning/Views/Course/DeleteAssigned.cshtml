@@ -1,0 +1,18 @@
+﻿@model CourseVM
+@{
+    ViewData["Title"] = "Delete Assigned";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <form asp-controller="Course" asp-action="DeleteAssigned">
+        <input type="hidden" asp-for="Id" />
+
+        <div>
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" class="btn btn-warning">Back To List</a>
+        </div>
+
+    </form>
+</div>

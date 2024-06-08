@@ -1,0 +1,274 @@
+﻿@using BLL.Interfaces
+
+@inject IUserRepository user;
+@inject ICourseRepository course;
+@inject ITopicRepository topic;
+<div class="row dashboard">
+    <!-- Column -->
+    <div class="col-md-7 col-lg-4">
+        <div class="card card-hover">
+            <div class="box bg-cyan text-center">
+                <h1 class="font-light text-white">
+                    <i class="fas fa-user"></i>
+                </h1>
+                <h6 class="text-white">Users</h6>
+                <input type="hidden" id="StudentCount" value="@user.GetStudentsCount()" />
+                <input type="hidden" id="InstructorCount" value="@user.GetInstructorsCount()" />
+                <span>@user.GetUsersCount()</span>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-7 col-lg-4">
+        <div class="card card-hover">
+            <div class="box bg-success text-center">
+                <h1 class="font-light text-white">
+                    <i class="fas fa-graduation-cap"></i>
+                </h1>
+                <h6 class="text-white">Courses</h6>
+                <span>@course.GetCoursesCount()</span>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-7 col-lg-4">
+        <div class="card card-hover">
+            <div class="box bg-warning text-center">
+                <h1 class="font-light text-white">
+                    <i class="fas fa-tags"></i>
+                </h1>
+                <h6 class="text-white">Topics</h6>
+                <span>@topic.GetTopicsCount()</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="card" style="hieght=530px">
+            <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
+                <div class="d-flex justify-content-between">
+                    <h4 class="card-title mb-0" id="UsersStatus">Users Status</h4>
+                    <i class="mdi mdi-dots-horizontal text-gray"></i>
+                </div>
+            </div>
+            <div class="card-body" style="width:100%;">
+
+                <div>
+                    <canvas id="myChart1"></canvas>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @*     <div class="col-md-12 col-lg-12 col-xl-12">
+    <div class="card">
+    <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
+    <div class="d-flex justify-content-between">
+    <h4 class="card-title mb-0" id="UsersStatus">Users Status</h4>
+    <i class="mdi mdi-dots-horizontal text-gray"></i>
+    </div>
+    </div>
+    <div class="card-body" style="width:100%;">
+
+    <div>
+    <canvas id="myChart2"></canvas>
+    </div>
+
+    </div>
+    </div>
+    </div> *@
+</div>
+@section Js
+{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        var usersStatus = document.getElementById("UsersStatus").textContent;
+        var student = document.getElementById("StudentCount").value;
+        var instructor = document.getElementById("InstructorCount").value;
+
+        const ctx = document.getElementById('myChart1');
+        const polarArea = document.getElementById('myChart2');
+        const labels = ["Student", "Instructor"];
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: usersStatus,
+                    data: [student, instructor],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 5 // Control the scale step size
+                        }
+
+                    }
+                }
+            }
+        });
+
+        // new Chart(polarArea, {
+        //     type: 'pie',
+        //     data: {
+        //         labels: labels,
+        //         datasets: [{
+        //             label: usersStatus,
+        //             data: [student, instructor],
+        //             backgroundColor: [
+        //                 'rgba(255, 99, 132, 0.2)',
+        //                 'rgba(255, 159, 64, 0.2)',
+        //             ],
+        //             borderColor: [
+        //                 'rgb(255, 99, 132)',
+        //                 'rgb(255, 159, 64)',
+        //             ],
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         scales: {
+        //             y: {
+        //                 beginAtZero: true,
+        //                 ticks: {
+        //                     stepSize: 5 // Control the scale step size
+        //                 }
+        //             }
+        //         }
+        //     }
+        // });
+    </script>
+}
+
+
+
+
+
+@* 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <form class="form-horizontal">
+                <div class="card-body">
+                    <h4 class="card-title">Personal Info</h4>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">First Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="fname" placeholder="First Name Here">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Last Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="lname" placeholder="Last Name Here">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="lname" placeholder="Password Here">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Company</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="email1" placeholder="Company Name Here">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="cono1" placeholder="Contact No Here">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Message</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-top">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+ *@
+
+
+
+
+@* <div class="row">
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-hover">
+            <div class="box bg-cyan text-center">
+                <h1 class="font-light text-white">
+                    <i class="mdi mdi-view-dashboard"></i>
+                </h1>
+                <h6 class="text-white">Dashboard</h6>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-hover">
+            <div class="box bg-success text-center">
+                <h1 class="font-light text-white">
+                    <i class="mdi mdi-chart-areaspline"></i>
+                </h1>
+                <h6 class="text-white">Charts</h6>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-hover">
+            <div class="box bg-warning text-center">
+                <h1 class="font-light text-white">
+                    <i class="mdi mdi-collage"></i>
+                </h1>
+                <h6 class="text-white">Widgets</h6>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-hover">
+            <div class="box bg-danger text-center">
+                <h1 class="font-light text-white">
+                    <i class="mdi mdi-border-outside"></i>
+                </h1>
+                <h6 class="text-white">Tables</h6>
+            </div>
+        </div>
+    </div>
+</div> *@

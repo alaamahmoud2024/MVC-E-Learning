@@ -1,0 +1,59 @@
+﻿@model CourseVM
+@{
+    ViewData["Title"] = "Edit";
+    var topics = ViewBag.Topics;
+}
+
+<div class="container">
+
+    <form asp-controller="Course" asp-action="Edit" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label required> Course Name :</label>
+            <input class="form-control" asp-for="Name" />
+        </div>
+
+        <div class="form-group">
+            <label required> OverView :</label>
+            <input class="form-control" asp-for="OverView" />
+        </div>
+
+        <div class="form-group">
+            <label required> Duration :</label>
+            <input type="number" class="form-control" asp-for="Duration" />
+        </div>
+
+        <div class="form-group">
+            <label required> Lessons Number :</label>
+            <input type="number" class="form-control" asp-for="Lessons" />
+        </div>
+
+        <div class="form-group">
+            <label required> Video Link :</label>
+            <input type="url" class="form-control" asp-for="Videos" />
+        </div>
+
+        <div class="form-group">
+            <label required> Language :</label>
+            <input class="form-control" asp-for="Language" />
+        </div>
+        <div class="form-group">
+            <label required> Price :</label>
+            <input type="number" class="form-control" asp-for="Price" />
+        </div>
+        <div class="form-group">
+            <label required> Topic :</label>
+            <select asp-for="TopicId" class="form-control">
+                <option selected>Choose Topic</option>
+                @foreach (var topic in topics)
+                {
+                    <option value="@topic.Id">@topic.Name</option>
+                }
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</div>

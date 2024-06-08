@@ -1,0 +1,61 @@
+﻿@model RegisterViewModel
+@{
+	ViewData["Title"] = "create New User";
+}
+
+<div class="row">
+	<div class="agileits-top">
+		<form asp-controller="Users" asp-action="Create" method="post">
+			<div asp-validation-summary="All"></div>
+
+			<div class="mb-3">
+				<label for="FName" class="form-label">First Name</label>
+				<input type="text" asp-for="FName" class="form-control" id="FName">
+				<span asp-validation-for="FName" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label for="LName" class="form-label">Last Name</label>
+				<input type="text" asp-for="LName" class="form-control" id="LName">
+				<span asp-validation-for="LName" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label for="Email" class="form-label">Email address</label>
+				<input type="email" asp-for="Email" class="form-control" id="Email" aria-describedby="emailHelp">
+				<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+				<span asp-validation-for="FName" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3">
+				<label for="Password" class="form-label">Password</label>
+				<input type="password" asp-for="Password" class="form-control" id="Password">
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label for="ConfirmPassword" class="form-label">Confirm Password</label>
+				<input type="password" asp-for="ConfirmPassword" class="form-control" id="ConfirmPassword">
+				<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+			</div>
+
+			<div>
+				<select asp-for ="UserType" class="form-select">
+					<option value="Student">Student</option>
+					<option value="Instructor">Instructor</option>
+				</select>
+			</div><br />
+
+			@* <input type="submit" class="btn btn-primary" value="Add"> *@
+			<button type="submit" class="btn btn-primary mt-2">
+				<i class="fa fa-plus"></i>
+				Add
+			</button>
+		</form>
+	</div>
+</div>
+@*
+@section Validation
+{
+	<partial name="_ValidationScriptsPartial"></partial>
+}
+ *@
